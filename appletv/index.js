@@ -100,15 +100,15 @@ exports.handler = function (request, context) {
             }]
         };
         var responseHeader = request.directive.header;
-        responseHeader.name = "Alexa.Response";
+        responseHeader.namespace = "Alexa";
+        responseHeader.name = "Response";
         responseHeader.messageId = responseHeader.messageId + "-R";
         var response = {
             context: contextResult,
             event: {
-                header: responseHeader
+                header: responseHeader,
+                payload: {}
             },
-            payload: {}
-
         };
         return response;
     }
@@ -130,15 +130,15 @@ exports.handler = function (request, context) {
             "properties": []
         };
         var responseHeader = request.directive.header;
-        responseHeader.name = "Alexa.Response";
+        responseHeader.namespace = "Alexa";
+        responseHeader.name = "Response";
         responseHeader.messageId = responseHeader.messageId + "-R";
         var response = {
             context: contextResult,
             event: {
-                header: responseHeader
+                header: responseHeader,
+                payload: {}
             },
-            payload: {}
-
         };
         return response;
     }
