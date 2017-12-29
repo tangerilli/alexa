@@ -29,8 +29,8 @@ def run_commands(loop, details, commands):
 command_definitions = {
     'on': ['select'],
     'off': ['top_menu', 1.0, 'menu', 0.5, 'down', 0.5, 'select', 0.5, 'down', 0.5, 'down', 0.5, 'down', 0.5, 'down', 0.5, 'down', 0.5, 'down', 0.5, 'down', 0.5, 'down', 0.5, 'down', 0.5, 'down', 0.5, 'select'],
-    'play': ['play'],
-    'pause': ['pause'],
+    'play': ['select'],
+    'pause': ['select'],
     'stop': ['menu'],
 }
 
