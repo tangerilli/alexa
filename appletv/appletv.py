@@ -17,8 +17,9 @@ def run_commands(loop, details, commands):
     atv = pyatv.connect_to_apple_tv(details, loop)
     try:
         for command in commands:
-            if instance(command, str):
-                yield from getattr(atv.remote_control, command_name)()
+            if isinstance(command, str):
+                method = getattr(atv.remote_control, command)
+                yield from method()
             elif isinstance(command, float):
                 time.sleep(command)
     finally:
@@ -42,8 +43,9 @@ def receive_messages(loop, details):
             if action not in command_definitions:
                 print('Invalid action {}'.format(action))
                 continue
-            run_commands(loop, details, command_definitions[action])
-        except Exception:
+            loop.run_until_complete(run_commands(loop, details, command_definitions[action]))
+        except Exception as e:
+            print(e)
             print('Error processing message: {}'.format(message))
         message.delete()
 
@@ -52,6 +54,7 @@ if __name__ == '__main__':
     loop = asyncio.get_event_loop()
     details = pyatv.AppleTVDevice('AppleTV', APPLE_TV_IP, LOGIN_ID)
 
+    print('Listening for messages...')
     while True:
         receive_messages(loop, details)
         time.sleep(1)
